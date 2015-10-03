@@ -60,6 +60,8 @@ void delay(double seconds, dispatch_block_t completion) {
   [snowClipView addSubview:_snowView];
   [self.view addSubview:snowClipView];
   
+  [self changeFlightDataTo:_flightDatas[0]];
+  
 }
 
 - (void)changeFlightDataTo:(FlightData*)data {
