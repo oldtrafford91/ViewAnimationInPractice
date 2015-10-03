@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SnowView.h
 //  ViewAnimationInPractice
 //
 //  Created by Tran Tuan Hai on 10/3/15.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface SnowView : UIView
 
 @end
-

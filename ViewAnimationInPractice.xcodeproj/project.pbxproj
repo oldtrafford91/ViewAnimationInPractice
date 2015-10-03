@@ -14,6 +14,8 @@
 		E1E05C391BBF559F00C31713 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E05C381BBF559F00C31713 /* Images.xcassets */; };
 		E1E05C3C1BBF559F00C31713 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1E05C3A1BBF559F00C31713 /* LaunchScreen.xib */; };
 		E1E05C481BBF559F00C31713 /* ViewAnimationInPracticeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C471BBF559F00C31713 /* ViewAnimationInPracticeTests.m */; };
+		E1E3EA321BBFD6280057DC99 /* SnowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3EA311BBFD6280057DC99 /* SnowView.m */; };
+		E1E3EA351BBFDCF10057DC99 /* FlightData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3EA341BBFDCF10057DC99 /* FlightData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		E1E05C411BBF559F00C31713 /* ViewAnimationInPracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewAnimationInPracticeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E05C461BBF559F00C31713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1E05C471BBF559F00C31713 /* ViewAnimationInPracticeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewAnimationInPracticeTests.m; sourceTree = "<group>"; };
+		E1E3EA301BBFD6280057DC99 /* SnowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnowView.h; sourceTree = "<group>"; };
+		E1E3EA311BBFD6280057DC99 /* SnowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnowView.m; sourceTree = "<group>"; };
+		E1E3EA331BBFDCF10057DC99 /* FlightData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlightData.h; sourceTree = "<group>"; };
+		E1E3EA341BBFDCF10057DC99 /* FlightData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlightData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +89,9 @@
 			children = (
 				E1E05C2F1BBF559F00C31713 /* AppDelegate.h */,
 				E1E05C301BBF559F00C31713 /* AppDelegate.m */,
-				E1E05C321BBF559F00C31713 /* ViewController.h */,
-				E1E05C331BBF559F00C31713 /* ViewController.m */,
+				E1EFCCA51BC0634100EF992F /* Model */,
+				E1EFCCA61BC0635200EF992F /* View */,
+				E1EFCCA71BC0637900EF992F /* Controller */,
 				E1E05C351BBF559F00C31713 /* Main.storyboard */,
 				E1E05C381BBF559F00C31713 /* Images.xcassets */,
 				E1E05C3A1BBF559F00C31713 /* LaunchScreen.xib */,
@@ -117,6 +124,33 @@
 				E1E05C461BBF559F00C31713 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E1EFCCA51BC0634100EF992F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E1E3EA331BBFDCF10057DC99 /* FlightData.h */,
+				E1E3EA341BBFDCF10057DC99 /* FlightData.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E1EFCCA61BC0635200EF992F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E1E3EA301BBFD6280057DC99 /* SnowView.h */,
+				E1E3EA311BBFD6280057DC99 /* SnowView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E1EFCCA71BC0637900EF992F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E1E05C321BBF559F00C31713 /* ViewController.h */,
+				E1E05C331BBF559F00C31713 /* ViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +256,8 @@
 				E1E05C341BBF559F00C31713 /* ViewController.m in Sources */,
 				E1E05C311BBF559F00C31713 /* AppDelegate.m in Sources */,
 				E1E05C2E1BBF559F00C31713 /* main.m in Sources */,
+				E1E3EA351BBFDCF10057DC99 /* FlightData.m in Sources */,
+				E1E3EA321BBFD6280057DC99 /* SnowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +452,7 @@
 				E1E05C4D1BBF559F00C31713 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1E05C4E1BBF559F00C31713 /* Build configuration list for PBXNativeTarget "ViewAnimationInPracticeTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +461,7 @@
 				E1E05C501BBF559F00C31713 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
