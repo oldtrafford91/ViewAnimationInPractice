@@ -10,6 +10,11 @@
 #import "SnowView.h"
 #import "FlightData.h"
 
+typedef NS_ENUM(NSInteger, AnimationDirection) {
+  Positive = 1,
+  Negative = -1
+};
+
 //Delay utility
 void delay(double seconds, dispatch_block_t completion) {
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(seconds * NSEC_PER_SEC));
@@ -96,8 +101,11 @@ void delay(double seconds, dispatch_block_t completion) {
   
   // populate the UI with the next flight's data
   self.summaryLabel.text = data.summary;
-  self.flightNr.text = data.flightNr;
-  self.gateNr.text = data.gateNr;
+  
+  AnimationDirection direction = data.isTakingOff ? Positive : Negative;
+  [self cubeTransition:self.flightNr text:data.flightNr direction:direction];
+  [self cubeTransition:self.gateNr text:data.gateNr direction:direction];
+  
   self.departingFrom.text = data.departingFrom;
   self.arrivingTo.text = data.arrivingTo;
   self.flightStatus.text = data.flightStatus;
@@ -106,6 +114,8 @@ void delay(double seconds, dispatch_block_t completion) {
   }else{
     self.bgImageView.image = [UIImage imageNamed:data.weatherImageName];
     _snowView.hidden = !data.showWeatherEffects;
+    self.flightNr.text = data.flightNr;
+    self.gateNr.text = data.gateNr;
   }
 
   // schedule next flight
@@ -131,6 +141,41 @@ void delay(double seconds, dispatch_block_t completion) {
                    animations:^{
                      _snowView.alpha = showEffects ? 1.0f : 0.0f;
                    } completion:nil];
+}
+
+- (void)cubeTransition:(UILabel*)label
+                  text:(NSString*)text
+             direction:(AnimationDirection)direction{
+  //Create auxlabel with new text and copy properties of existing label
+  UILabel *auxLabel = [[UILabel alloc] initWithFrame:label.frame];
+  auxLabel.text = text;
+  auxLabel.font = label.font;
+  auxLabel.textAlignment = label.textAlignment;
+  auxLabel.textColor = label.textColor;
+  auxLabel.backgroundColor = [UIColor clearColor];
+  
+  //Transform auxlabel and add it to same hireachy with existing label
+  CGFloat auxLabelOffset = direction * label.frame.size.height / 2.0f;
+  auxLabel.transform = CGAffineTransformConcat( CGAffineTransformMakeScale(1.0f, 0.1f),
+                                               CGAffineTransformMakeTranslation(0.0f, auxLabelOffset));
+  [label.superview addSubview:auxLabel];
+  
+  
+  [UIView animateWithDuration:0.5f
+                        delay:0.0f
+                      options:UIViewAnimationOptionCurveEaseOut
+                   animations:^{
+                     auxLabel.transform = CGAffineTransformIdentity;
+                     label.transform = CGAffineTransformConcat( CGAffineTransformMakeScale(1.0f, 0.1f),
+                                                               CGAffineTransformMakeTranslation(0.0f, -auxLabelOffset));
+                     
+                   }
+                   completion:^(BOOL finished) {
+                     label.text = auxLabel.text;
+                     label.transform = CGAffineTransformIdentity;
+                     [auxLabel removeFromSuperview];
+                   }];
+
 }
 
 @end
