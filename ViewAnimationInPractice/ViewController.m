@@ -18,7 +18,6 @@ typedef NS_ENUM(NSInteger, AnimationDirection) {
 //Delay utility
 void delay(double seconds, dispatch_block_t completion) {
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(seconds * NSEC_PER_SEC));
-  
   dispatch_after(popTime, dispatch_get_main_queue(), ^{
     completion();
   });
@@ -101,21 +100,29 @@ void delay(double seconds, dispatch_block_t completion) {
   
   // populate the UI with the next flight's data
   self.summaryLabel.text = data.summary;
-  
-  AnimationDirection direction = data.isTakingOff ? Positive : Negative;
-  [self cubeTransition:self.flightNr text:data.flightNr direction:direction];
-  [self cubeTransition:self.gateNr text:data.gateNr direction:direction];
-  
-  self.departingFrom.text = data.departingFrom;
-  self.arrivingTo.text = data.arrivingTo;
-  self.flightStatus.text = data.flightStatus;
+
   if (animated) {
+    AnimationDirection direction = data.isTakingOff ? Positive : Negative;
+    
     [self fadeImageView:self.bgImageView toImage:[UIImage imageNamed:data.weatherImageName] showEffects:data.showWeatherEffects];
+    
+    [self cubeTransition:self.flightNr text:data.flightNr direction:direction];
+    [self cubeTransition:self.gateNr text:data.gateNr direction:direction];
+    
+    CGPoint departingFromOffset = CGPointMake(direction * 80, 0.0);
+    [self fadeAndBounce:self.departingFrom text:data.departingFrom offset:departingFromOffset];
+    CGPoint arrivingToOffset = CGPointMake(0.0, direction * 50);
+    [self fadeAndBounce:self.arrivingTo text:data.arrivingTo offset:arrivingToOffset];
+    
+    [self cubeTransition:self.flightStatus text:data.flightStatus direction:direction];
   }else{
     self.bgImageView.image = [UIImage imageNamed:data.weatherImageName];
     _snowView.hidden = !data.showWeatherEffects;
     self.flightNr.text = data.flightNr;
     self.gateNr.text = data.gateNr;
+    self.departingFrom.text = data.departingFrom;
+    self.arrivingTo.text = data.arrivingTo;
+    self.flightStatus.text = data.flightStatus;
   }
 
   // schedule next flight
@@ -160,7 +167,7 @@ void delay(double seconds, dispatch_block_t completion) {
                                                CGAffineTransformMakeTranslation(0.0f, auxLabelOffset));
   [label.superview addSubview:auxLabel];
   
-  
+  // Animate label and auxLabel
   [UIView animateWithDuration:0.5f
                         delay:0.0f
                       options:UIViewAnimationOptionCurveEaseOut
@@ -171,11 +178,52 @@ void delay(double seconds, dispatch_block_t completion) {
                      
                    }
                    completion:^(BOOL finished) {
+                     //Clean up
                      label.text = auxLabel.text;
                      label.transform = CGAffineTransformIdentity;
                      [auxLabel removeFromSuperview];
                    }];
 
+}
+
+- (void)fadeAndBounce:(UILabel*)label
+                 text:(NSString*)text
+               offset:(CGPoint)offset{
+
+  //Create auxlabel with new text and copy properties of existing label
+  UILabel *auxLabel = [[UILabel alloc] initWithFrame:label.frame];
+  auxLabel.text = text;
+  auxLabel.font = label.font;
+  auxLabel.textAlignment = label.textAlignment;
+  auxLabel.textColor = label.textColor;
+  auxLabel.backgroundColor = [UIColor clearColor];
+  
+  //Transform auxlabel and add it to same hireachy with existing label
+  auxLabel.transform = CGAffineTransformMakeTranslation(offset.x, offset.y);
+  auxLabel.alpha = 0;
+  [label.superview addSubview:auxLabel];
+  
+  //Animate label and auxLabel
+  [UIView animateWithDuration:0.5f
+                        delay:0.0f
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+                     label.transform = CGAffineTransformMakeTranslation(offset.x, offset.y);
+                     label.alpha = 0.0f;
+                     }completion:nil];
+  [UIView animateWithDuration:0.25f
+                        delay:0.25f
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+                     auxLabel.alpha = 1.0f;
+                     auxLabel.transform = CGAffineTransformIdentity;
+                   }completion:^(BOOL isFinished){
+                     //Clean up
+                     [auxLabel removeFromSuperview];
+                     label.text = text;
+                     label.alpha = 1.0f;
+                     label.transform = CGAffineTransformIdentity;
+                   }];
 }
 
 @end
