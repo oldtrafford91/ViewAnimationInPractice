@@ -115,6 +115,7 @@ void delay(double seconds, dispatch_block_t completion) {
     [self fadeAndBounce:self.arrivingTo text:data.arrivingTo offset:arrivingToOffset];
     
     [self cubeTransition:self.flightStatus text:data.flightStatus direction:direction];
+    [self planDepart];
   }else{
     self.bgImageView.image = [UIImage imageNamed:data.weatherImageName];
     _snowView.hidden = !data.showWeatherEffects;
@@ -224,6 +225,51 @@ void delay(double seconds, dispatch_block_t completion) {
                      label.alpha = 1.0f;
                      label.transform = CGAffineTransformIdentity;
                    }];
+}
+
+- (void)planDepart{
+  CGPoint originalPlanCenter = self.planImageView.center;
+  [UIView animateKeyframesWithDuration:1.5f delay:0.0f options:0 animations:^{
+    [UIView addKeyframeWithRelativeStartTime:0.0f
+                            relativeDuration:0.25f
+                                  animations:^{
+                                    self.planImageView.center = ({
+                                      CGPoint center = self.planImageView.center;
+                                      center.x += 80.0f;
+                                      center.y -= 10.0f;
+                                      center;
+                                    });
+                                  }];
+    [UIView addKeyframeWithRelativeStartTime:0.1f
+                            relativeDuration:0.4f
+                                  animations:^{
+                                    self.planImageView.transform = CGAffineTransformMakeRotation(-M_PI_4/2);
+                                  }];
+    [UIView addKeyframeWithRelativeStartTime:0.25f
+                            relativeDuration:0.25f
+                                  animations:^{
+                                    self.planImageView.center = ({
+                                      CGPoint center = self.planImageView.center;
+                                      center.x += 100.0f;
+                                      center.y -= 50.0f;
+                                      center;
+                                    });
+                                    self.planImageView.alpha = 0.0f;
+                                  }];
+    [UIView addKeyframeWithRelativeStartTime:0.51f
+                            relativeDuration:0.01f
+                                  animations:^{
+                                    self.planImageView.transform = CGAffineTransformIdentity;
+                                    self.planImageView.center = CGPointMake(0.0f, originalPlanCenter.y);
+                                  }];
+    [UIView addKeyframeWithRelativeStartTime:0.55f
+                            relativeDuration:0.45f
+                                  animations:^{
+                                    self.planImageView.alpha = 1.0f;
+                                    self.planImageView.center = originalPlanCenter;
+                                  }];
+    
+  } completion:nil];
 }
 
 @end
