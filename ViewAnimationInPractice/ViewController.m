@@ -99,8 +99,6 @@ void delay(double seconds, dispatch_block_t completion) {
 - (void)changeFlightDataTo:(FlightData*)data animated:(BOOL)animated{
   
   // populate the UI with the next flight's data
-  self.summaryLabel.text = data.summary;
-
   if (animated) {
     AnimationDirection direction = data.isTakingOff ? Positive : Negative;
     
@@ -116,7 +114,9 @@ void delay(double seconds, dispatch_block_t completion) {
     
     [self cubeTransition:self.flightStatus text:data.flightStatus direction:direction];
     [self planDepart];
+    [self switchSummaryLabelTo:data.summary];
   }else{
+    self.summaryLabel.text = data.summary;
     self.bgImageView.image = [UIImage imageNamed:data.weatherImageName];
     _snowView.hidden = !data.showWeatherEffects;
     self.flightNr.text = data.flightNr;
@@ -124,6 +124,7 @@ void delay(double seconds, dispatch_block_t completion) {
     self.departingFrom.text = data.departingFrom;
     self.arrivingTo.text = data.arrivingTo;
     self.flightStatus.text = data.flightStatus;
+    self.summaryLabel.text = data.summary;
   }
 
   // schedule next flight
@@ -270,6 +271,29 @@ void delay(double seconds, dispatch_block_t completion) {
                                   }];
     
   } completion:nil];
+}
+
+- (void)switchSummaryLabelTo:(NSString*)summaryText{
+  [UIView animateKeyframesWithDuration:1.0f delay:0.0f options:0 animations:^{
+    [UIView addKeyframeWithRelativeStartTime:0.0f relativeDuration:0.45f animations:^{
+      self.summaryLabel.center = ({
+        CGPoint center = self.summaryLabel.center;
+        center.y -= 100.0f;
+        center;
+      });
+    }];
+    [UIView addKeyframeWithRelativeStartTime:0.5f relativeDuration:0.45f animations:^{
+      self.summaryLabel.center = ({
+        CGPoint center = self.summaryLabel.center;
+        center.y += 100.0f;
+        center;
+      });
+    }];
+  } completion:nil];
+  
+  delay(0.5f, ^{
+    self.summaryLabel.text = summaryText;
+  });
 }
 
 @end
