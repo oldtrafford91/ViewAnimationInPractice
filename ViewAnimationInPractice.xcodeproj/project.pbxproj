@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1211C231BF28777009AF2C6 /* screenshot in Resources */ = {isa = PBXBuildFile; fileRef = E1211C221BF28777009AF2C6 /* screenshot */; };
+		E1211C251BF287DF009AF2C6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E1211C241BF287DF009AF2C6 /* README.md */; };
 		E1E05C2E1BBF559F00C31713 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C2D1BBF559F00C31713 /* main.m */; };
 		E1E05C311BBF559F00C31713 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C301BBF559F00C31713 /* AppDelegate.m */; };
 		E1E05C341BBF559F00C31713 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C331BBF559F00C31713 /* ViewController.m */; };
@@ -29,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1211C221BF28777009AF2C6 /* screenshot */ = {isa = PBXFileReference; lastKnownFileType = folder; path = screenshot; sourceTree = "<group>"; };
+		E1211C241BF287DF009AF2C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E1E05C281BBF559F00C31713 /* ViewAnimationInPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewAnimationInPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E05C2C1BBF559F00C31713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1E05C2D1BBF559F00C31713 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 		E1E05C1F1BBF559F00C31713 = {
 			isa = PBXGroup;
 			children = (
+				E1211C241BF287DF009AF2C6 /* README.md */,
+				E1211C221BF28777009AF2C6 /* screenshot */,
 				E1E05C2A1BBF559F00C31713 /* ViewAnimationInPractice */,
 				E1E05C441BBF559F00C31713 /* ViewAnimationInPracticeTests */,
 				E1E05C291BBF559F00C31713 /* Products */,
@@ -233,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1211C231BF28777009AF2C6 /* screenshot in Resources */,
 				E1E05C371BBF559F00C31713 /* Main.storyboard in Resources */,
 				E1E05C3C1BBF559F00C31713 /* LaunchScreen.xib in Resources */,
 				E1E05C391BBF559F00C31713 /* Images.xcassets in Resources */,
@@ -253,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1211C251BF287DF009AF2C6 /* README.md in Sources */,
 				E1E05C341BBF559F00C31713 /* ViewController.m in Sources */,
 				E1E05C311BBF559F00C31713 /* AppDelegate.m in Sources */,
 				E1E05C2E1BBF559F00C31713 /* main.m in Sources */,
