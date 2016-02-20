@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E1211C231BF28777009AF2C6 /* screenshot in Resources */ = {isa = PBXBuildFile; fileRef = E1211C221BF28777009AF2C6 /* screenshot */; };
 		E1E05C2E1BBF559F00C31713 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C2D1BBF559F00C31713 /* main.m */; };
 		E1E05C311BBF559F00C31713 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C301BBF559F00C31713 /* AppDelegate.m */; };
 		E1E05C341BBF559F00C31713 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E05C331BBF559F00C31713 /* ViewController.m */; };
@@ -238,7 +237,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1211C231BF28777009AF2C6 /* screenshot in Resources */,
 				E1E05C371BBF559F00C31713 /* Main.storyboard in Resources */,
 				E1E05C3C1BBF559F00C31713 /* LaunchScreen.xib in Resources */,
 				E1E05C391BBF559F00C31713 /* Images.xcassets in Resources */,
